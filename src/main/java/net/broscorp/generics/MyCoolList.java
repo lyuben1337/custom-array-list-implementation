@@ -2,26 +2,14 @@ package net.broscorp.generics;
 
 import java.util.function.Function;
 
-public class MyCoolList {
+public interface MyCoolList<T extends Number> extends Iterable<T> {
+    void add(T element);
 
-  public void add(Object o) {
-    throw new RuntimeException("Not implemented");
-  }
+    T remove(int index);
 
-  public Object get(int index) {
-    throw new RuntimeException("Not implemented");
-  }
+    T get(int index);
 
-  public Object remove(int index) {
-    throw new RuntimeException("Not implemented");
-  }
+    int size();
 
-  public MyCoolList map(Function f) {
-    throw new RuntimeException("Not implemented");
-  }
-
-  public int size() {
-    throw new RuntimeException("Not implemented");
-  }
-
+    <R extends Number> MyCoolList<R> map(Function<T, R> function);
 }
