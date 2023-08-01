@@ -62,13 +62,14 @@ class MyCoolListTest {
   void testInvalidIndex() {
     list = new MyCoolArrayList<>();
 
-    assertThrows(IllegalArgumentException.class, () -> list.get(-1));
-    assertThrows(IllegalArgumentException.class, () -> list.get(0));
-    list.add(1);
-    assertThrows(IllegalArgumentException.class, () -> list.get(1));
+    assertThrows(IndexOutOfBoundsException.class, () -> list.get(-1));
+    assertThrows(IndexOutOfBoundsException.class, () -> list.get(0));
 
-    assertThrows(IllegalArgumentException.class, () -> list.remove(-1));
-    assertThrows(IllegalArgumentException.class, () -> list.remove(1));
+    list.add(1);
+    assertThrows(IndexOutOfBoundsException.class, () -> list.get(1));
+
+    assertThrows(IndexOutOfBoundsException.class, () -> list.remove(-1));
+    assertThrows(IndexOutOfBoundsException.class, () -> list.remove(1));
   }
 
   @Test

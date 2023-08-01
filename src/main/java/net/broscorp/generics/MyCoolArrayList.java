@@ -40,7 +40,9 @@ public class MyCoolArrayList<T extends Number> implements MyCoolList<T> {
   @Override
   public T get(int index) {
     if (index < 0 || index >= size) {
-      throw new IllegalArgumentException("Out of range");
+      throw new IndexOutOfBoundsException(
+          "Index " + index + " is out of range. Array size is: " + size
+      );
     }
     return data[index];
   }
@@ -48,13 +50,16 @@ public class MyCoolArrayList<T extends Number> implements MyCoolList<T> {
   @Override
   public T remove(int index) {
     if (index < 0 || index >= size) {
-      throw new IllegalArgumentException("Out of range");
+      throw new IndexOutOfBoundsException(
+          "Index " + index + " is out of range. Array size is: " + size
+      );
     }
     T removedElem = data[index];
-    System.arraycopy(data, index + 1, data, index,size - index - 1);
+    System.arraycopy(data, index + 1, data, index, size - index - 1);
     data[--size] = null;
     return removedElem;
   }
+
 
   @Override
   public int size() {
@@ -112,11 +117,14 @@ public class MyCoolArrayList<T extends Number> implements MyCoolList<T> {
 
   @Override
   public int hashCode() {
-    int result = 74321 * Objects.hash(size);
+    final int prime = 31;
+    int result = 1;
 
+    result = prime * result + Objects.hashCode(size);
     for (int i = 0; i < size; i++) {
-      result = result + (data[i] == null ? 0 : data[i].hashCode());
+      result = prime * result + Objects.hashCode(data[i]);
     }
+
     return result;
   }
 
